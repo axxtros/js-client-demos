@@ -1,0 +1,13 @@
+//webGL
+https://webglfundamentals.org/
+
+//shader editor
+http://shdr.bkcore.com/
+
+//shader tutorials
+https://thebookofshaders.com/
+https://thebookofshaders.com/05/
+https://openframeworks.cc/ofBook/chapters/shaders.html#yourfirstshader
+
+//keywords
+shader development environment

@@ -1,0 +1,200 @@
+
+body {
+	font-family: 'Segoe UI',SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 0.8em;
+}
+
+/* common header ------------------------------------------------------------*/
+.header-wrapper {
+	display: block;
+	width: auto;
+	height: 30px;
+	border-top: 1px solid #d6d7d8;
+	border-bottom: 1px solid #d6d7d8;
+	background-color: #f3f3f3;
+	font-size: 11px;
+}
+
+.header-demo-title-wrapper {	
+	float: left;	
+	font-weight: bold;
+	padding: 6px 0 0 10px;	
+}
+
+.header-demo-create-date-wrapper {
+	float: left;	
+	font-weight: normal;
+	padding: 6px 0 0 10px;	
+}
+
+.header-demo-backlink-wrapper {
+	float: right;
+	padding-right: 10px;	
+	background-color: transparent;
+}
+
+.canvas-button-wrapper {
+	float: left;
+}
+
+.refres-page-button {
+	margin: 0 0 0 20px;
+	font-weight: bold;
+	height: 30px;
+	border: none;
+	color: white;
+	background-color: #30a4ff;
+	border-left: 1px solid #d6d7d8;
+  border-right: 1px solid #d6d7d8;
+}
+
+.refres-page-button:hover {
+	cursor: pointer;
+}
+
+/* according panel start ----------------------------------------------------*/
+.according-panel-wrapper {
+	display: block;
+	clear: both;
+	border-top: 1px solid #c5d9ff;
+}
+
+.according-panel-header {
+	background-color:  #e8f4ff;
+	min-height: 30px;
+}
+
+.according-panel-openCloseIcon {
+	float: left;
+	width: 20px;
+	padding: 5px 0 0 10px;
+	font-weight: bold;	
+	font-size: 12px !important;
+}
+
+.according-panel-title {
+	float: left;
+	padding: 6px 0 0 10px;	
+	font-weight: bold;
+	font-size: 12px !important;
+}
+
+.accordnig-panel-content {
+	padding: 5px 0 5px 0;	
+}
+
+/* according panel end ------------------------------------------------------*/
+
+/* commons ------------------------------------------------------------------*/
+
+.short-number-input {
+	width: 60px;
+	margin: 0 0 0 10px;
+	text-align: right;
+}
+
+.body-ending-div {
+	display: block;
+	clear: both;	
+}
+
+/* index.html ---------------------------------------------------------------*/
+
+.title-wrapper {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 4px 0 0 10px;
+}
+
+.contents-wrapper {
+	margin: 10px;
+}
+
+.link-wrapper a {
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.demo-link-wrapper {
+	display: block;
+}
+
+.demo-link-wrapper a {
+	font-size: 14px;	
+	color: #0025ab;
+}
+
+.demo-link-wrapper a:hover {
+	color: #4168f7;
+}
+
+.tutorial-link-wrapper {
+	display: contents;		
+}
+
+.tutorial-link-wrapper a {
+	margin-right: 20px;
+	font-size: 12px;	
+	color: #029007;
+}
+
+.tutorial-link-wrapper a:hover {
+	color: #0cdc14;
+}
+
+.common-link-wrapper {
+	display: contents;		
+}
+
+.common-link-wrapper a {
+	margin-right: 20px;
+	font-size: 12px;	
+	color: #bb2806;
+}
+
+.common-link-wrapper a:hover {
+	color: #ff3a0c;
+}
+
+.link-separator {
+	display: block;
+	height: 12px;
+}
+
+.section-wrapper {
+	display: block;
+	height: 20px;
+	margin: 10px 0 10px 0;
+	border-top: 1px solid #d6d7d8;
+	border-bottom: 1px solid #d6d7d8;
+	background-color: #f3f3f3;
+	font-size: 11px;
+}
+
+.section-wrapper:hover {
+	background-color: #dedede;
+	cursor: pointer;
+}
+
+.section-title-wrapper {
+	font-size: 12px;
+	font-weight: bold;
+	padding: 2px 0 0 4px;
+}
+
+/* footer -------------------------------------------------------------------*/
+
+.footer-wrapper {
+	display: block;
+	height: 30px;
+	border-top: 1px solid #d6d7d8;
+	border-bottom: 1px solid #d6d7d8;
+	background-color: #f3f3f3;
+	font-size: 11px;
+}
+
+.footer-text-wrapper {
+	margin: 0 auto;
+	padding: 8px 0 0 0;
+	width: 300px;
+}

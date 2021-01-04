@@ -1,0 +1,79 @@
+tasks
+===============================================================================
+A* pathfinder algorithm
+2d map convert to isometric render
+map convert to vertex shapes
+
+Game algorithm tutorials, assets
+===============================================================================
+https://www.redblobgames.com/
+
+2D Visibilities
+===============================================================================
+https://ncase.me/sight-and-light/
+https://legends2k.github.io/2d-fov/
+https://legends2k.github.io/2d-fov/design.html
+
+//https://www.youtube.com/watch?v=2yrgzlRhAes
+
+Isometric game demo
+===============================================================================
+https://www.youtube.com/watch?v=wtoL7rOk970
+
+math
+===============================================================================
+Check if line intersects with circles perimeter
+https://math.stackexchange.com/questions/275529/check-if-line-intersects-with-circles-perimeter
+https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
+http://paulbourke.net/geometry/circlesphere/
+
+javascript - game loop
+===============================================================================
+//https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing#physics-problems
+
+javascript- game tutorials
+===============================================================================
+https://codeincomplete.com/
+
+maze and dungeon generator algorithms
+===============================================================================
+https://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/
+https://www.emanueleferonato.com/2015/06/30/pure-javascript-perfect-tile-maze-generation-with-a-bit-of-magic-thanks-to-phaser/
+https://www.youtube.com/watch?v=n-5wYShWQo8
+
+Isometric solutions
+===============================================================================
+https://gamedevelopment.tutsplus.com/tutorials/creating-isometric-worlds-a-primer-for-game-developers--gamedev-6511
+https://gamedev.stackexchange.com/questions/45253/diamond-shaped-selection-on-a-staggered-iso-map
+
+//triangle
+http://www.webtutorialplus.com/html5-canvas-shapes/
+
+Isometric map image draw
+===============================================================================
+https://stackoverflow.com/questions/23635945/how-can-a-isometric-floor-be-drawn-on-a-canvas
+
+Isometric mouse calc
+===============================================================================
+https://yal.cc/understanding-isometric-grids/
+https://laserbrainstudios.com/2010/08/the-basics-of-isometric-programming/
+http://christopherdumas.org/astraterra/?p=80
+
+Isometric graphics
+===============================================================================
+https://www.artstation.com/search?q=isometric
+https://www.artstation.com/artwork/5JPxE
+https://cubebrush.co/3dmotive/products/cr0msq/model-and-texture-a-stylized-dungeon-for-games
+
+-> ezt csináld meg tesztnek:
+https://www.youtube.com/watch?v=ZuzpWPEW5g4
+
+A* pathfinding
+===============================================================================
+http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+https://www.youtube.com/watch?v=KNXfSOx4eEE
+
+keywords:
+===============================================================================
+dungeon game menu
+

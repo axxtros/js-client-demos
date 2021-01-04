@@ -1,0 +1,39 @@
+/* 2d_visibility.css css */
+
+.canvas-system-wrapper {
+	float: left;	
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;	
+}
+
+.pathfind-sandbox-canvas-wrapper {
+	display: block;
+	/* fullHD */
+	/*width: 100%; /*1920px;*/
+	min-height: 100% !important;
+}
+
+.common-canvas-class {
+	margin: 5px;
+}
+
+.map-canvas-class {
+	margin: 0 auto;
+	/*border: 1px solid blue;*/
+}
+
+.lines-canvas-class {
+	margin: 0 auto;
+	/*border: 1px solid red;*/
+}
+
+.mouse-canvas-class {
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+.maze-canvas-class {
+	margin-top: 5px;
+	margin-bottom: 5px;	
+}

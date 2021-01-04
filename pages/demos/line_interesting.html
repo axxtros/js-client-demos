@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10, IE=9, IE=8" />
+    <title>Line intersect</title>
+    <script src="../../js/libs/jquery-3.3.1.min.js"></script>
+    <script src="../../js/demos/according.js"></script>
+    <script src="../../js/demos/line_interesting.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/line_interesting.css">
+  </head>
+  <body onload="initLineInteresting();">
+  	
+    <div class="header-wrapper">      
+      <div class="header-demo-title-wrapper">Line intersect</div>
+      <div class="header-demo-create-date-wrapper">(2019.05.14.)</div>
+
+      <div class="canvas-button-wrapper">
+        <input type="button" value="Refresh page" class="refres-page-button" onclick="location.reload();" />
+      </div>
+
+      <div class="header-demo-backlink-wrapper"><a href="../../index.html"><img border="0" alt="back to index page" title="Back to index page" src="../../img/back_icon_32x32.png" width="28" height="28"></a></div>
+    </div>
+
+    <!-- ================================================================== -->
+
+    <!-- egyenesek metszéspontja -->
+    <div class="according-panel-wrapper">
+      <!--
+      <div class="according-panel-header" onclick="accordingPanelHeaderClickEvent(this)" onmouseover="accordingPanelHeaderOnmouseOverEvent(this);">
+        <div class="according-panel-openCloseIcon">[-]</div>
+        <div class="according-panel-title">Lines interesting</div>
+      </div>
+      -->
+      <div class="accordnig-panel-content">
+        
+        <div class="descartes-cord-system-wrapper">
+          <canvas id="descartes-canvas-id" width="600" height="600" ></canvas>
+          <canvas id="lines-canvas-id" width="600" height="600" ></canvas>
+          <canvas id="mouse-canvas-id" width="600" height="600" onmousemove="writeMouseCoord(event); drawFromMouseCoord();" onmousedown="startDrawMode();" onmouseup="stopDrawMode()"></canvas>
+        </div>        
+
+        <div class="line-interesting-form-wrapper">
+          <div class="line-form red-line-form">           
+            <div class="line-name-div red-line">Line 1:</div>
+            <div class="point-form">
+              <span class="line-coords-div red-line">P1(</span>
+              <span class="line-coords-div red-line">X:</span><span><input id="p1x" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div red-line">Y:</span><span><input id="p1y" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div red-line">)</span>              
+            </div>                        
+            <div class="point-form">
+              <span class="line-coords-div red-line">P2(</span>
+              <span class="line-coords-div red-line">X:</span><span><input id="p2x" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div red-line">Y:</span><span><input id="p2y" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div red-line">)</span>             
+            </div>
+            <div class="point-form">
+              <table>
+                <tr>
+                  <td width="60px"><span id="line1-direction-vec" class="line-coords-div red-line">v(0, 0)</span></td>
+                  <td ><label class="vector-check-label">Direction vector<input id="line1-direction-visible" type="checkbox" name="checkbox" value="value" onclick="visibleLineVectorsEvent('P', 'D');" /><labe></td>
+                  <td><label class="vector-check-label">Flip<input id="line1-direction-flip" type="checkbox" name="checkbox" value="value" onclick="flipLineVectorsEvent('P', 'D');" /></label></td>      
+                </tr>
+              </table>              
+            </div>
+            <div class="point-form">
+              <table>
+                <tr>
+                  <td width="60px"><span id="line1-normal-vec" class="line-coords-div red-line">n(0, 0)</span></td>
+                  <td style="padding-left: 10px;"><label class="vector-check-label">Normal vector<input id="line1-normal-visible" type="checkbox" name="checkbox" value="value" onclick="visibleLineVectorsEvent('P', 'N');" /></label></td>
+                  <td><label class="vector-check-label">Flip<input id="line1-normal-flip" type="checkbox" name="checkbox" value="value" onclick="flipLineVectorsEvent('P', 'N');" /></label></td>
+                </tr>
+              </table>
+            </div>            
+            <div class="point-form">
+              <input type="button" value="Draw" class="draw-button" onclick="drawDescartesClickEvent('P');" />
+            </div>  
+          </div>
+
+          <div class="line-form blue-line-form">
+            <div class="line-name-div blue-line">Line 2:</div>
+            <div class="point-form">
+              <span class="line-coords-div blue-line">Q1(</span>
+              <span class="line-coords-div blue-line">X:</span><span><input id="q1x" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div blue-line">Y:</span><span><input id="q1y" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div blue-line">)</span>  
+            </div>            
+            <div class="point-form">
+              <span class="line-coords-div blue-line">Q2(</span>
+              <span class="line-coords-div blue-line">X:</span><span><input id="q2x" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div blue-line">Y:</span><span><input id="q2y" class="short-number-input" type="number" maxlength="2" /></span>
+              <span class="line-coords-div blue-line">)</span>
+            </div>
+            <div class="point-form">
+              <table>
+                <tr>
+                  <td width="60px"><span id="line2-direction-vec" class="line-coords-div blue-line">v(0, 0)</span></td>
+                  <td><label class="vector-check-label">Direction vector<input id="line2-direction-visible" type="checkbox" name="checkbox" value="value" onclick="visibleLineVectorsEvent('Q', 'D');" /></label></td>
+                  <td><label class="vector-check-label">Flip<input id="line2-direction-flip" type="checkbox" name="checkbox" value="value" onclick="flipLineVectorsEvent('Q', 'D');" /></label></td>
+                </tr>
+              </table>
+            </div>
+            <div class="point-form">
+              <table>
+                <tr>
+                  <td width="60px"><span id="line2-normal-vec" class="line-coords-div blue-line">n(0, 0)</span></td>
+                  <td style="padding-left: 10px;"><label class="vector-check-label">Normal vector<input id="line2-normal-visible" type="checkbox" name="checkbox" value="value" onclick="visibleLineVectorsEvent('Q', 'N');" /></label></td>
+                  <td><label class="vector-check-label">Flip<input id="line2-normal-flip" type="checkbox" name="checkbox" value="value" onclick="flipLineVectorsEvent('Q', 'N');" /></label></td>
+                </tr>
+              </table>
+            </div>                    
+            <div class="point-form">
+              <input type="button" value="Draw" class="draw-button" onclick="drawDescartesClickEvent('Q');" />
+            </div>  
+          </div>
+          
+          <div class="line-interesting-form-wrapper green-line-form">          
+            <div class="line-name-div green-line">Intersect point:</div>
+            <div class="point-form">
+              <span id="interesting-point-span" class="line-coords-div green-line">M(0, 0)</span>
+            </div>          
+          </div>          
+          
+        </div>        
+
+
+      </div>
+    
+    </div>    
+
+    <!-- ================================================================== -->  	
+
+    <div class="body-ending-div"></div>      
+    <div class="footer-wrapper">
+      <div class="footer-text-wrapper">Developed by <b>axtros</b>, 2018-<span id="current_year">0000</span>. E-mail: <a href="mailto:axtros@gmail.com">axtros@gmail.com</a></div>
+    </div>
+
+    <script>
+      document.getElementById("current_year").innerHTML = new Date().getFullYear();      
+    </script>
+
+  </body>

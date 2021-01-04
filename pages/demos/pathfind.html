@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10, IE=9, IE=8" />
+    <title>Demos - Pathfind</title>    
+    <script src="../../js/libs/jquery-3.3.1.min.js"></script>
+    <script src="../../js/demos/util.js"></script>
+    <script src="../../js/demos/according.js"></script>    
+    <script src="../../js/demos/dungeon_generator.js"></script>
+    <script src="../../js/demos/pathfind.js"></script>
+    <link rel="stylesheet" href="../../css/visibility_2d.css" />
+    <link rel="stylesheet" href="../../css/main.css" />
+  </head>
+  <body onload="init_pathfind();">
+  	
+    <div class="header-wrapper">      
+      <div class="header-demo-title-wrapper">Pathfind</div>
+      <div class="header-demo-create-date-wrapper">(2019.05.31.)</div>
+
+      <div class="canvas-button-wrapper">
+        <input type="button" value="Refresh page" class="refres-page-button" onclick="location.reload();" />
+      </div>
+
+      <div class="header-demo-backlink-wrapper"><a href="../../index.html"><img border="0" alt="back to index page" title="Back to index page" src="../../img/back_icon_32x32.png" width="28" height="28"></a></div>
+    </div>
+
+    <!-- ================================================================== -->
+
+    <div class="canvas-system-wrapper">
+      <canvas id="map-canvas-id" class="maze-canvas-class" width="160" height="160" style="z-index: 1;"></canvas>
+    </div>
+
+    <!-- ================================================================== -->  	
+
+    <div class="body-ending-div"></div>      
+    <div class="footer-wrapper">
+      <div class="footer-text-wrapper">Developed by <b>axtros</b>, 2018-<span id="current_year">0000</span>. E-mail: <a href="mailto:axtros@gmail.com">axtros@gmail.com</a></div>
+    </div>
+
+    <script>
+      document.getElementById("current_year").innerHTML = new Date().getFullYear();      
+    </script>
+
+  </body>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10, IE=9, IE=8" />
+    <title>Demos, prototypes, algorithms</title>    
+    <script src="js/libs/jquery-3.3.1.min.js"></script>    
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    
+    <div class="header-wrapper">      
+      <div class="header-demo-title-wrapper title-wrapper">Demos, prototypes, algorithms</div>
+    </div>
+
+    <!-- helps, commons page -->
+    <div class="section-wrapper" onclick="openCloseSection(this)">
+      <div class="section-title-wrapper">Helps</div>
+    </div>
+    <div class="contents-wrapper" style="display: block;">
+      <div class="link-wrapper common-link-wrapper"><a href="https://topszotar.hu/angol-magyar-szotar/" target="_blank">Topszótár</a></div>
+      <div class="link-wrapper common-link-wrapper"><a href="https://translate.google.com/?hl=hu" target="_blank">Google translate</a></div>      
+    </div>    
+    
+    <!-- demos -->
+    <div class="section-wrapper" onclick="openCloseSection(this)">
+      <div class="section-title-wrapper">Demos</div>
+    </div>
+    <div class="contents-wrapper" style="display: block;">
+      <div class="link-wrapper tutorial-link-wrapper"><a href="https://www.redblobgames.com/" target="_blank">Redblobgames</a></div>
+
+      <div class="link-separator"></div>
+
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/sorting_algorithm.html">1. Sorting algorithms</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/line_interesting.html">2. Line intersect</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/visibility_2d.html">3. 2D Light (and AI visibility) demo (no optimalizated)</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/game_2d_light_demo.html">4. 2D Game light graphics with vertex environment (no optimalizated)</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/game_2d_light_with_matrix.html">5. 2D Game light with matrix environment (full optimalizated)</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/perfect_maze_generator.html">6. Perfect maze generator</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/perfect_maze_generator_animated.html">7. Animated perfect maze generator</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/dungeon_generator.html">8. Dungeon generator</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/isometric_map.html">9. Isometric map</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/pathfind.html">10. Pathfind with A* algorithm</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/hexagons_1.html">11. Hexagon study 1</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/hexagons_2.html">12. Hexagon study 2</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/demos/pathfind_sandbox.html">13. Pathfind sandbox</a></div>
+    </div>
+      
+    <!-- webgl -->
+    <div class="section-wrapper" onclick="openCloseSection(this)">      
+      <div class="section-title-wrapper">WebGL</div>
+    </div>
+    <div class="contents-wrapper" style="display: block;">
+      <div class="link-wrapper tutorial-link-wrapper"><a href="http://learnwebgl.brown37.net/" target="_blank">Learn WebGL</a></div>        
+      <div class="link-wrapper tutorial-link-wrapper"><a href="https://webglfundamentals.org/" target="_blank">WebGL Fundamentals</a></div>      
+      <div class="link-wrapper tutorial-link-wrapper"><a href="http://www.webgltutorials.org/index.html" target="_blank">WebGL Tutorial</a></div>
+      <div class="link-wrapper tutorial-link-wrapper"><a href="https://assetstore.unity.com/packages/3d/props/low-poly-ultimate-pack-54733#content" target="_blank">Assetstore.unity.com</a></div>
+      
+      <div class="link-separator"></div>
+      
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/webgl/draw_point_1.html">1. Draw single point</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/webgl/draw_point_2.html">2. Draw multiple point with mouse click</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/webgl/webgl_multiple_point_triangle_vertexbuffer.html">3. Draw multiple point from vertexBuffer</a></div>
+      <div class="link-wrapper demo-link-wrapper"><a href="pages/webgl/webgl_basic_transformations.html">4. Basic transformations</a></div>
+    </div>
+
+
+    <div class="body-ending-div"></div>      
+    <div class="footer-wrapper">
+      <div class="footer-text-wrapper">Developed by <b>axtros</b>, 2018-<span id="current_year"></span>. E-mail: <a href="mailto:axtros@gmail.com">axtros@gmail.com</a></div>
+    </div>
+
+    <script>
+      document.getElementById("current_year").innerHTML = new Date().getFullYear();
+      
+      function openCloseSection(section_wrapper_element) {
+        content_wrapper_element = $(section_wrapper_element).next();
+        if(content_wrapper_element != null && content_wrapper_element != 'undefined') {                    
+          var display_class = $(content_wrapper_element).css('display');
+          if(display_class === "block") {
+            $(content_wrapper_element).slideUp("fast");
+          } else {
+            $(content_wrapper_element).slideDown("fast");
+          }
+        }
+      }
+    </script>
+    
+  </body>
+  </html>

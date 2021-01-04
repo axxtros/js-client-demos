@@ -1,0 +1,28 @@
+/* sorting panel start ------------------------------------------------------*/
+
+.array-list-dashboard-wrapper {
+	display: block;	
+}
+
+.element-inputs-title {
+	display: block;	
+}
+
+.element-inputs-wrapper {
+	display: block;	
+	min-height: 32px;
+	background-color:  #e8e8e8;
+}
+
+.element-buttons-wrapper {
+	display: block;	
+	padding: 10px 0 10px 0;
+}
+
+.element-input {
+	width: 40px;
+	margin: 5px;
+	text-align: right;
+}
+
+/* sorting panel end --------------------------------------------------------*/

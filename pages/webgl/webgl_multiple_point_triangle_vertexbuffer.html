@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebGL - Draw multiple point from vertex buffer</title>
+    <script src="../../js/libs/jquery-3.3.1.min.js"></script>
+    <script src="../../js/webGL/webgl_shaders.js"></script>
+    <script src="../../js/webGL/webgl_common.js"></script>
+    <script src="../../js/webGL/webgl_multiple_point_triangle_vertexbuffer.js"></script>
+    <link rel="stylesheet" href="../../css/main.css" />    
+    <link rel="stylesheet" href="../../css/webgl_main.css" />
+  </head>
+  <body onload="main()">
+  	
+    <div class="header-wrapper">      
+      <div class="header-demo-title-wrapper">WebGL - Draw multiple point from vertex buffer</div>
+      <div class="header-demo-create-date-wrapper">(2020.01.13.)</div>
+      <div class="header-demo-backlink-wrapper"><a href="../../index.html"><img border="0" alt="back to index page" title="Back to index page" src="../../img/back_icon_32x32.png" width="28" height="28"></a></div>
+    </div>
+
+    <!-- ================================================================== -->
+
+    <div class="canvas-system-wrapper">
+      <canvas id="webgl_canvas" class="webgl-canvas-class" width="400" height="400" style="z-index: 1;">
+        Please use a browser that supports "canvas"!
+      </canvas>
+    </div>
+
+    <!-- ================================================================== -->  	
+
+    <div class="body-ending-div"></div>      
+    <div class="footer-wrapper">
+      <div class="footer-text-wrapper">Developed by <b>axtros</b>, 2018-<span id="current_year">0000</span>. E-mail: <a href="mailto:axtros@gmail.com">axtros@gmail.com</a></div>
+    </div>
+
+    <script>
+      document.getElementById("current_year").innerHTML = new Date().getFullYear();      
+    </script>
+
+  </body>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10, IE=9, IE=8" />
+    <title>Sorting algorithms</title>
+    <script src="../../js/libs/jquery-3.3.1.min.js"></script>
+    <script src="../../js/demos/according.js"></script>
+    <script src="../../js/demos/sort_algorithm.js"></script>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/sort_algorithm.css" />
+  </head>
+  <body onload="initSorting();">
+
+    <div class="header-wrapper">      
+      <div class="header-demo-title-wrapper">Sorting algorithms</div>
+      <div class="header-demo-create-date-wrapper">(2019.05.14.)</div>
+      <div class="header-demo-backlink-wrapper"><a href="../../index.html"><img border="0" alt="back to index page" title="Back to index page" src="../../img/back_icon_32x32.png" width="28" height="28"></a></div>
+    </div>
+
+  	<!-- rendezések -->
+    <div class="according-panel-wrapper">
+      <!--
+      <div class="according-panel-header" onclick="accordingPanelHeaderClickEvent(this)" onmouseover="accordingPanelHeaderOnmouseOverEvent(this)">
+        <div class="according-panel-openCloseIcon">[-]</div>
+        <div class="according-panel-title">Sorting algorithms</div>
+      </div>
+      -->
+      <div class="accordnig-panel-content" style="display: block;">
+
+        <div class="array-list-dashboard-wrapper">
+          <div class="element-inputs-title">Elements:</div>
+          <div id="elementInputsWrapper" class="element-inputs-wrapper">            
+          </div>
+          <div class="element-buttons-wrapper">
+            <input type="button" value="+" onclick="addNewElementEvent(null)" title="Add new element" />
+            <input type="button" value="-" onclick="removeLastElementEvent()" title="Remove element" />
+            <input type="button" value="Rand. elements" onclick="genRandomElementsEvent()" />
+            <input type="button" value="Short elements" onclick="shortingElements()" />           
+            <span>Element number: </span><span id="element-number"></span>
+          </div>
+        </div>
+
+        <div style="display: block;">
+          
+          <div style="float: left; padding: 0 100px 0 0;">
+            <span style="font-weight: bold;">Bubble sort</span>
+            <table id="bublesorterTable">
+              <tr></tr>
+          </table>    
+          </div>
+
+          <div style="float: left; padding: 10px 100px 0 0;">
+            <span style="font-weight: bold;">Quicksort</span>
+            <table id="quicksorterTable">
+              <tr></tr>       
+          </table>      
+          </div>
+
+        </div>
+        
+        <span id="values"></span><br/>
+        <span id="bubleSortedValues"></span><br/>
+        <span id="quickSortedValues"></span><br/>
+
+      </div>
+    </div>
+    <!-- rendezések vége -->
+
+    <div class="body-ending-div"></div>      
+    <div class="footer-wrapper">
+      <div class="footer-text-wrapper">Developed by <b>axtros</b>, 2018-<span id="current_year">0000</span>. E-mail: <a href="mailto:axtros@gmail.com">axtros@gmail.com</a></div>
+    </div>
+
+    <script>
+      document.getElementById("current_year").innerHTML = new Date().getFullYear();      
+    </script>
+
+  </body>
