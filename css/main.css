@@ -27,10 +27,27 @@ body {
 	padding: 6px 0 0 10px;	
 }
 
-.header-demo-backlink-wrapper {
+.exit-page-button-wrapper {
 	float: right;
-	padding-right: 10px;	
-	background-color: transparent;
+	display: block;
+	height: inherit;
+	min-width: 80px;
+	border-left: 1px solid #d6d7d8;
+	border-right: 1px solid #d6d7d8;
+}
+
+.exit-anchor-wrapper {		
+	text-decoration: none;	
+}
+
+.exit-anchor-background {			
+	font-weight: bold;	
+	font-size: 16px;	
+	text-align: center;
+	color: white;
+	background-color: #30a4ff;
+	height: 26px;
+	padding-top: 4px;
 }
 
 .canvas-button-wrapper {
@@ -40,12 +57,13 @@ body {
 .refres-page-button {
 	margin: 0 0 0 20px;
 	font-weight: bold;
+	min-width: 80px;
 	height: 30px;
 	border: none;
 	color: white;
 	background-color: #30a4ff;
 	border-left: 1px solid #d6d7d8;
-  border-right: 1px solid #d6d7d8;
+  	border-right: 1px solid #d6d7d8;
 }
 
 .refres-page-button:hover {
@@ -56,7 +74,7 @@ body {
 .according-panel-wrapper {
 	display: block;
 	clear: both;
-	border-top: 1px solid #c5d9ff;
+	/* border-top: 1px solid #c5d9ff; */
 }
 
 .according-panel-header {
