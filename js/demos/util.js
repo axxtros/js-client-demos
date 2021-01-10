@@ -38,3 +38,15 @@ function generateRandomNumber(minValue, maxValue) {
 function refreshPage() {
 	location.reload();
 }
+
+/** 
+ * Init a new game canvas layer from template canvas.
+ */
+function initCanvasLayerCSS(canvasNameID, templateCanvasPos) {
+	let canvasID = '#' + canvasNameID;
+	$(canvasID).css('position', 'absolute');
+	$(canvasID).css({ top: templateCanvasPos.top + 'px' });	
+	$(canvasID).css({ left: templateCanvasPos.left + 'px' });	
+	$(canvasID).css({ width: templateCanvasPos.width + 'px' });	
+	$(canvasID).css({ height: templateCanvasPos.height + 'px' });
+}

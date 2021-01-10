@@ -83,8 +83,7 @@ function initCanvases() {
 	mapContext.scale(1, 1);
 	linesContext.scale(1, 1);
 	mouseContext.scale(1, 1);
-
-	let mapCanvasPos = mapCanvas.getBoundingClientRect();
+	
 	mapContext.fillStyle = "#204060";
 	mapContext.fillRect(0, 0, mapCanvas.width, mapCanvas.height);
 	
@@ -102,17 +101,9 @@ function initCanvases() {
 
 	initMapMatrix(mapWidth, mapHeight);
 
-	$('#lines-canvas-id').css('position', 'absolute');
-	$("#lines-canvas-id").css({ top: mapCanvasPos.top + 'px' });	
-	$("#lines-canvas-id").css({ left: mapCanvasPos.left + 'px' });	
-	$("#lines-canvas-id").css({ width: mapCanvasPos.width + 'px' });	
-	$("#lines-canvas-id").css({ height: mapCanvasPos.height + 'px' });	
-
-	$('#mouse-canvas-id').css('position', 'absolute');
-	$("#mouse-canvas-id").css({ top: mapCanvasPos.top + 'px' });	
-	$("#mouse-canvas-id").css({ left: mapCanvasPos.left + 'px' });	
-	$("#mouse-canvas-id").css({ width: mapCanvasPos.width + 'px' });	
-	$("#mouse-canvas-id").css({ height: mapCanvasPos.height + 'px' });
+	let mapCanvasPos = mapCanvas.getBoundingClientRect();
+	initCanvasLayerCSS('lines-canvas-id', mapCanvasPos);
+	initCanvasLayerCSS('mouse-canvas-id', mapCanvasPos);	
 }
 
 function initMapMatrix(width, height) {
