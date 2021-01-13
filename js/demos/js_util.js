@@ -5,22 +5,31 @@
 //utis ----------------------------------------------------------------------------------------------------------------
 var util = (function() {
 
-  //private scope
-  
-  
-  return {
-    //public scope
+  return {    
+
+    resizeCanvas: function(canvasElement, newWidth, newHeight) {
+      canvasElement.width = newWidth;
+      canvasElement.height = newHeight;
+      canvasElement.setAttribute("style", "width: " + canvasElement.width + "px");    //importanat: Need resize the CSS protperties!
+      canvasElement.setAttribute("style", "height: " + canvasElement.height + "px");
+    },
 
     /** 
      * Init a new game canvas layer from template canvas.
      */
-    initCanvasLayerCSS: function(canvasNameID, templateCanvasPos) {
+    addNewCanvasLayer: function(canvasNameID, templateCanvasBoundingClientRect) {
       let canvasID = '#' + canvasNameID;
       $(canvasID).css('position', 'absolute');
-      $(canvasID).css({ top: templateCanvasPos.top + 'px' });	
-      $(canvasID).css({ left: templateCanvasPos.left + 'px' });	
-      $(canvasID).css({ width: templateCanvasPos.width + 'px' });	
-      $(canvasID).css({ height: templateCanvasPos.height + 'px' });
+      $(canvasID).css({ top: templateCanvasBoundingClientRect.top + 'px' });	
+      $(canvasID).css({ left: templateCanvasBoundingClientRect.left + 'px' });	
+      $(canvasID).css({ width: templateCanvasBoundingClientRect.width + 'px' });	
+      $(canvasID).css({ height: templateCanvasBoundingClientRect.height + 'px' });
+    },
+
+    initCanvasContext(canvasElement) {
+      let canvasContext = canvasElement.getContext("2d");
+      canvasContext.scale(1, 1);
+      return canvasContext;
     }
 
   };
@@ -39,18 +48,10 @@ var math = (function() {
 
 //draw ----------------------------------------------------------------------------------------------------------------
 var draw = (function() {
-
-  function resizeCanvas(canvasElement, newWidth, newHeight) {
-    canvasElement.width = newWidth;
-    canvasElement.height = newHeight;
-    canvasElement.setAttribute("style", "width: " + canvasElement.width + "px");    //importanat: Need resize the CSS protperties!
-    canvasElement.setAttribute("style", "height: " + canvasElement.height + "px");
-  }
-
+  
   function drawFillRectangle(canvasContext, x, y, width, height, color) {	
     canvasContext.fillStyle = color;
-    canvasContext.fillRect(x, y, width, height);
-    console.log('draw...');
+    canvasContext.fillRect(x, y, width, height);    
   }
 
   function drawLine(canvasContext, x1, y1, x2, y2, color) {
@@ -65,10 +66,9 @@ var draw = (function() {
   }
   
   return {
-    //public scope
 
-    resizeCanvas: function (canvasElement, newWidth, newHeight) {
-      resizeCanvas(canvasElement, newWidth, newHeight);
+    drawCanvasBackground: function(canvasContext, width, height, color) {
+      drawFillRectangle(canvasContext, 0, 0, width, height, color);
     },
 
     drawFillSquare: function (canvasContext, x, y, size, color) {
