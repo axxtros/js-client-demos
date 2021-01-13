@@ -7,6 +7,9 @@ var util = (function() {
 
   return {    
 
+    /**
+     * Set canvas size.
+     */
     resizeCanvas: function(canvasElement, newWidth, newHeight) {
       canvasElement.width = newWidth;
       canvasElement.height = newHeight;
@@ -15,7 +18,7 @@ var util = (function() {
     },
 
     /** 
-     * Init a new game canvas layer from template canvas.
+     * Set canvas layer CSS from template canvas.
      */
     addNewCanvasLayer: function(canvasNameID, templateCanvasBoundingClientRect) {
       let canvasID = '#' + canvasNameID;
@@ -36,12 +39,21 @@ var util = (function() {
 }());
 
 //math ----------------------------------------------------------------------------------------------------------------
-var math = (function() {
-  //private scope
+var math = (function() {  
   
-  
+  function generateRandomNumberWithLimits(minValue, maxValue) {
+    return Math.floor(Math.random() * (maxValue - minValue + 1) + minValue);
+  }
+
   return {
-    //public scope
+    generateRandomNumberWithLimits: function(minValue, maxValue) {
+      return generateRandomNumberWithLimits(minValue, maxValue);
+    },
+
+    generateRandomOddNumber: function(minValue, maxValue) {
+      let genNumber = generateRandomNumberWithLimits(minValue, maxValue);
+      return genNumber % 2 == 0 ? ++genNumber : genNumber;
+    }  
 
   };
 }());
