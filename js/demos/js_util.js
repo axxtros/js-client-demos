@@ -33,7 +33,11 @@ var util = (function() {
       let canvasContext = canvasElement.getContext("2d");
       canvasContext.scale(1, 1);
       return canvasContext;
-    }
+    },
+
+    nowTimeStamp: function() {
+      return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+    },
 
   };
 }());
@@ -76,6 +80,10 @@ var draw = (function() {
     canvasContext.closePath();
     canvasContext.stroke();
   }
+
+  function clearRectangle(canvasContext, x, y, width, height) {
+    canvasContext.clearRect(x, y, x + width, y + height); 
+  }
   
   return {
 
@@ -89,6 +97,14 @@ var draw = (function() {
 
     drawLine: function(canvasContext, x1, y1, x2, y2, color) {
       drawLine(canvasContext, x1, y1, x2, y2, color);
+    },
+
+    clearSquare: function(canvasContext, x, y, size) {
+      clearRectangle(canvasContext, x, y, size, size);
+    },
+
+    clearRectangle: function(canvasContext, x, y, width, height) {
+      clearRectangle(canvasContext, x, y, width, height);
     }
 
   };
