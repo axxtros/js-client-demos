@@ -166,10 +166,7 @@ var snakeGame = (function() {
             case 3: snake.direction = SNAKE_DIRECTION.LEFT; break;
         }
         snake.bodyTiles = new Array();
-        snake.currentLength = constans.SNAKE_START_LENGTH;        
-        //console.log('snake.direction: ' + snake.direction);
-        //console.log('snake start snake.head.column: ' + snake.head.column + ' snake.head.row: ' + snake.head.row);
-        //draw.drawFillSquare(gameSnakeContext, snake.head.column * constans.TILESIZE, snake.head.row * constans.TILESIZE, constans.TILESIZE, constans.SNAKE_TILE_GRID_COLOR);
+        snake.currentLength = constans.SNAKE_START_LENGTH;                
     }
 
     function createTarget() {
@@ -186,7 +183,6 @@ var snakeGame = (function() {
                 isCreateNew = true;
             }
         } while(!isCreateNew);
-        //console.log('target start target.pos.column: ' + target.pos.column + ' target.pos.row: ' + target.pos.row);        
     }
 
     function processInput(keyEvent) {
@@ -232,6 +228,10 @@ var snakeGame = (function() {
             case SNAKE_DIRECTION.RIGHT: ++snake.head.column; break;
             case SNAKE_DIRECTION.DOWN: ++snake.head.row; break;
             case SNAKE_DIRECTION.LEFT: --snake.head.column; break;
+        }
+        //snake and target collision managment
+        if(snake.head.row === target.pos.row && snake.head.column === target.pos.column) {
+            createTarget();            
         }
     }
 
@@ -284,7 +284,7 @@ var snakeGame = (function() {
 
 var constans = (function() {
 
-    var _TILESIZE = 10;        
+    var _TILESIZE = 20;        
     var _DATA_CANVAS_HEIGHT = 30;
     var _MAP_EMPTY_GRID = 0;
     var _CANVAS_BACKGROUND_COLOR = '#204060';
