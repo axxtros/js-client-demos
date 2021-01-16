@@ -41,14 +41,16 @@ var snakeGame = (function() {
     };
 
     var targetObject = {
-        pos: tileObject
+        pos: tileObject,
+        isRendered: false
     }
 
     var snakeObject = {
         head: tileObject,     
         direction: SNAKE_DIRECTION,               //0-top, 1-right, 2-down, 3-left
-        length: 4,
-        bodyTiles: new Array()
+        currentLength: 0,
+        bodyTiles: new Array(),
+        deletedElement: tileObject
     };
 
     var mapObject = {
@@ -163,9 +165,11 @@ var snakeGame = (function() {
             case 2: snake.direction = SNAKE_DIRECTION.DOWN; break;
             case 3: snake.direction = SNAKE_DIRECTION.LEFT; break;
         }
-        console.log('snake.direction: ' + snake.direction);
-        console.log('snake start snake.head.column: ' + snake.head.column + ' snake.head.row: ' + snake.head.row);
-        draw.drawFillSquare(gameSnakeContext, snake.head.column * constans.TILESIZE, snake.head.row * constans.TILESIZE, constans.TILESIZE, constans.SNAKE_TILE_GRID_COLOR);
+        snake.bodyTiles = new Array();
+        snake.currentLength = constans.SNAKE_START_LENGTH;        
+        //console.log('snake.direction: ' + snake.direction);
+        //console.log('snake start snake.head.column: ' + snake.head.column + ' snake.head.row: ' + snake.head.row);
+        //draw.drawFillSquare(gameSnakeContext, snake.head.column * constans.TILESIZE, snake.head.row * constans.TILESIZE, constans.TILESIZE, constans.SNAKE_TILE_GRID_COLOR);
     }
 
     function createTarget() {
@@ -177,12 +181,12 @@ var snakeGame = (function() {
                 target = Object.create(targetObject);
                 target.pos = Object.create(tileObject);
                 target.pos.row = targetStartRow;
-                target.pos.column = targetStartColumn;                
+                target.pos.column = targetStartColumn;
+                target.isRendered = true;
                 isCreateNew = true;
             }
         } while(!isCreateNew);
-        console.log('target start target.pos.column: ' + target.pos.column + ' target.pos.row: ' + target.pos.row);
-        draw.drawFillSquare(gameSnakeContext, target.pos.column * constans.TILESIZE, target.pos.row * constans.TILESIZE, constans.TILESIZE, constans.TARGET_TILE_GRID_COLOR);
+        //console.log('target start target.pos.column: ' + target.pos.column + ' target.pos.row: ' + target.pos.row);        
     }
 
     function processInput(keyEvent) {
@@ -211,6 +215,18 @@ var snakeGame = (function() {
     }
 
     function update() {
+        //snake body managment
+        let newSneakBodyElement = Object.create(tileObject);        
+        newSneakBodyElement.row = snake.head.row;
+        newSneakBodyElement.column = snake.head.column; 
+        snake.bodyTiles.unshift(newSneakBodyElement);        //add first element to snakebody        
+        snake.deletedElement = null;
+        if(snake.bodyTiles.length > snake.currentLength) {
+            snake.deletedElement = Object.create(tileObject);
+            snake.deletedElement = snake.bodyTiles[snake.bodyTiles.length - 1];
+            snake.bodyTiles.pop();                          //delete last element from snakebody
+        }
+        //snake direction managment
         switch(snake.direction) {
             case SNAKE_DIRECTION.UP: --snake.head.row; break;
             case SNAKE_DIRECTION.RIGHT: ++snake.head.column; break;
@@ -220,10 +236,15 @@ var snakeGame = (function() {
     }
 
     function render() {
-        console.log('snake move snake.head.column: ' + snake.head.column + ' snake.head.row: ' + snake.head.row);
+        console.log('snake move snake.head.column: ' + snake.head.column + ' snake.head.row: ' + snake.head.row);        
         draw.drawFillSquare(gameSnakeContext, snake.head.column * constans.TILESIZE, snake.head.row * constans.TILESIZE, constans.TILESIZE, constans.SNAKE_TILE_GRID_COLOR);
-        //draw.clearSquare(gameSnakeContext, (snake.head.column) * constans.TILESIZE, snake.head.row * constans.TILESIZE, constans.TILESIZE, constans.SNAKE_TILE_GRID_COLOR);
-        //console.log('render...');
+        if(snake.deletedElement !== null) {
+            draw.clearSquare(gameSnakeContext, snake.deletedElement.column * constans.TILESIZE, snake.deletedElement.row * constans.TILESIZE, constans.TILESIZE);
+        }
+        if(target.isRendered) {     //no redundant rendered
+            draw.drawFillSquare(gameSnakeContext, target.pos.column * constans.TILESIZE, target.pos.row * constans.TILESIZE, constans.TILESIZE, constans.TARGET_TILE_GRID_COLOR);
+            target.isRendered = false;
+        }
     }
 
     //gameloop tutorials: 
@@ -270,6 +291,7 @@ var constans = (function() {
     var _GAME_BACKGROUND_GRID_COLOR = '#1f3852';
     var _TARGET_TILE_GRID_COLOR = '#000';
     var _SNAKE_TILE_GRID_COLOR = '#fff';
+    var _SNAKE_START_LENGTH = 4;
 
     return {
 
@@ -280,6 +302,6 @@ var constans = (function() {
         GAME_BACKGROUND_GRID_COLOR: _GAME_BACKGROUND_GRID_COLOR,
         TARGET_TILE_GRID_COLOR: _TARGET_TILE_GRID_COLOR,
         SNAKE_TILE_GRID_COLOR: _SNAKE_TILE_GRID_COLOR,
-        
+        SNAKE_START_LENGTH: _SNAKE_START_LENGTH,
 };
 }());

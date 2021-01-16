@@ -82,7 +82,7 @@ var draw = (function() {
   }
 
   function clearRectangle(canvasContext, x, y, width, height) {
-    canvasContext.clearRect(x, y, x + width, y + height); 
+    canvasContext.clearRect(x, y, width, height); 
   }
   
   return {
