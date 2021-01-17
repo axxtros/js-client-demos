@@ -42,7 +42,8 @@ var snakeGame = (function() {
 
     var targetObject = {
         pos: tileObject,
-        isRendered: false
+        isRendered: false,
+        hitPoint: 4
     }
 
     var snakeObject = {
@@ -172,6 +173,7 @@ var snakeGame = (function() {
                 target.pos.row = targetStartRow;
                 target.pos.column = targetStartColumn;
                 target.isRendered = true;
+                target.hitPoint = 4;
                 isCreateNew = true;
             }
         } while(!isCreateNew);
@@ -217,7 +219,44 @@ var snakeGame = (function() {
     }
 
     function update() {
-        //snake body managment
+        //snake direction control
+        switch(snake.direction) {
+            case SNAKE_DIRECTION.UP: --snake.head.row; break;
+            case SNAKE_DIRECTION.RIGHT: ++snake.head.column; break;
+            case SNAKE_DIRECTION.DOWN: ++snake.head.row; break;
+            case SNAKE_DIRECTION.LEFT: --snake.head.column; break;
+        }
+        //snake and target collision
+        if(snake.head.row === target.pos.row && snake.head.column === target.pos.column) {
+            snake.currentLength += target.hitPoint;
+            createTarget();            
+        }
+        //snake and wall collision (in default case, the snake new position on the other side)
+        //top side
+        if(snake.head.row === -1) {
+            snake.head.row = gameMapRow - 1;
+        }
+        //right side
+        if(snake.head.column === gameMapColumn) {
+            snake.head.column = 0;
+        }
+        //bottom side
+        if(snake.head.row === gameMapRow) {
+            snake.head.row = 0;
+        }
+        //left side
+        if(snake.head.column === -1) {
+            snake.head.column = gameMapColumn - 1;
+        }
+        //snake collision with myself (penultimate step!!!)
+        for(let i = 0; i !== snake.bodyTiles.length; i++) {
+            let snakeBodyElement = snake.bodyTiles[i];
+            if(snake.head.row === snakeBodyElement.row && snake.head.column === snakeBodyElement.column) {
+                isGameRunning = false;
+                return;
+            }
+        }
+        //snake body control (last step!!!)
         let newSneakBodyElement = Object.create(tileObject);        
         newSneakBodyElement.row = snake.head.row;
         newSneakBodyElement.column = snake.head.column; 
@@ -227,17 +266,6 @@ var snakeGame = (function() {
             snake.deletedElement = Object.create(tileObject);
             snake.deletedElement = snake.bodyTiles[snake.bodyTiles.length - 1];
             snake.bodyTiles.pop();                          //delete last element from snakebody
-        }
-        //snake direction managment
-        switch(snake.direction) {
-            case SNAKE_DIRECTION.UP: --snake.head.row; break;
-            case SNAKE_DIRECTION.RIGHT: ++snake.head.column; break;
-            case SNAKE_DIRECTION.DOWN: ++snake.head.row; break;
-            case SNAKE_DIRECTION.LEFT: --snake.head.column; break;
-        }
-        //snake and target collision managment
-        if(snake.head.row === target.pos.row && snake.head.column === target.pos.column) {
-            createTarget();            
         }
     }
 
