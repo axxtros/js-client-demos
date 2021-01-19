@@ -12,6 +12,7 @@
     - sprite-ok alkalmazása valamilyen grafikus programban létrehozva, és rárakva a canvas-re,
     - canvas egér kezelés sprite-on, és egy kijelölt területen területen,
     - hang effektek létrehozása (+ esetleg zene),
+    - a browser localDB-be adatot menteni / olvasni
 */
 
 //sprite object example:
