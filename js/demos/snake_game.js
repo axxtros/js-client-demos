@@ -14,6 +14,13 @@
     - hang effektek létrehozása (+ esetleg zene),
 */
 
+//sprite object example:
+//https://mr-easy.github.io/2017-06-26-creating-spritesheet-animation-in-html5-canvas-using-javascript/
+//http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
+
+//GameObject example:
+//https://mr-easy.github.io/2017-06-26-creating-spritesheet-animation-in-html5-canvas-using-javascript/
+
 "use strict";
 
 var snakeGame = (function() {    
@@ -61,6 +68,7 @@ var snakeGame = (function() {
     var isGameRunning = false;
     var isKeyDown = true;           //a render előtt ne lehessen dupla billentyűt használni, ez nélkül a snake-et vissza lehetne fordítani saját magába (a addEventListener független a gameLoop-tól)
     var gameSpeed = 40;
+    var hitSoundEffect;
 
     //game loop variables
     var now; 
@@ -72,9 +80,9 @@ var snakeGame = (function() {
         dataBackgroundCanvasElement = document.getElementById('data-background-canvas');
         dataDisplayCanvasElement = document.getElementById('data-display-canvas');
         gameBackgroundCanvasElement = document.getElementById('game-background-canvas');
-        gameSnakeCanvasElement = document.getElementById('game-snake-canvas');        
+        gameSnakeCanvasElement = document.getElementById('game-snake-canvas');
 
-        if(gameBackgroundCanvasElement !== null && gameSnakeCanvasElement !== null && dataBackgroundCanvasElement !== null && dataDisplayCanvasElement !== null) {            
+        if(gameBackgroundCanvasElement !== null && gameSnakeCanvasElement !== null && dataBackgroundCanvasElement !== null && dataDisplayCanvasElement !== null) {
 
             //az egyes canvas-ek pontos mérete a tile méret alapján lesz kalkulálva úgy, hogy annyi tile legyen kirajzolva, amennyi elfér a böngésző aktuális méretében
             let canvaswrapperDivWidht = Math.floor(document.getElementById("game-canvas-wrapper").offsetWidth);
@@ -135,6 +143,11 @@ var snakeGame = (function() {
     function initDataBackgroundCanvas() {
         draw.drawCanvasBackground(dataBackgroundContext, dataBackgroundCanvasElement.width, dataBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);
 
+    }
+
+    function initAudio() {
+        hitSoundEffect = new Audio('../../audio/hit.mp3');
+        hitSoundEffect.type = 'audio/mp3';        
     }
 
     function initGame() {
@@ -228,6 +241,7 @@ var snakeGame = (function() {
         }
         //snake and target collision
         if(snake.head.row === target.pos.row && snake.head.column === target.pos.column) {
+            playAudio();
             snake.currentLength += target.hitPoint;
             createTarget();            
         }
@@ -267,6 +281,10 @@ var snakeGame = (function() {
             snake.deletedElement = snake.bodyTiles[snake.bodyTiles.length - 1];
             snake.bodyTiles.pop();                          //delete last element from snakebody
         }
+    }
+
+    async function playAudio() {
+        await hitSoundEffect.play();        
     }
 
     //minden esetben csak a 'minimális' renderelés történik meg, ha valaminek nem változott a grafikus property-je, vagy a pozicíója, akkor nem rajzoljuk ki újra
@@ -313,7 +331,8 @@ var snakeGame = (function() {
         
         init: function() {
             initCanvases();
-            initGame();            
+            initAudio();
+            initGame();
             requestAnimationFrame(gameLoop);
         }
 
