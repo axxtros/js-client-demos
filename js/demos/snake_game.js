@@ -70,6 +70,7 @@ var snakeGame = (function() {
     var isKeyDown = true;           //a render előtt ne lehessen dupla billentyűt használni, ez nélkül a snake-et vissza lehetne fordítani saját magába (a addEventListener független a gameLoop-tól)
     var gameSpeed = 40;
     var hitSoundEffect;
+    var numberImage;
 
     //game loop variables
     var now; 
@@ -96,7 +97,7 @@ var snakeGame = (function() {
             //(header + footer [azonos magasságúak, ez a kétszeres szorzó])
             //a dataDisplayCanvas magassága
             //a div-ek közötti padding-ok összege + ráhagyás
-            let outerSnakeCanvasHeights = ((2 * (Math.floor(30 / constans.TILESIZE))) * constans.TILESIZE) + 
+            let outerSnakeCanvasHeights = ((2 * (Math.floor(30 / constans.TILESIZE))) * constans.TILESIZE) +
                     (Math.floor(constans.DATA_CANVAS_HEIGHT / constans.TILESIZE) * constans.TILESIZE) + constans.WEB_PAGE_DIV_PADDING_HEIGHTS;
             let tileCanvasHeight = (Math.floor(window.innerHeight / constans.TILESIZE) * constans.TILESIZE) - ((Math.floor(outerSnakeCanvasHeights / constans.TILESIZE) * constans.TILESIZE));
 
@@ -112,9 +113,10 @@ var snakeGame = (function() {
             gameMapRow = (tileCanvasHeight / constans.TILESIZE);
             gameMapColumn = (tileCanvasWidth / constans.TILESIZE);
             
-            initCanvasContexts();
+            initCanvasContexts();            
             initDataBackgroundCanvas();
             initGameBackgroundCanvas();
+            initGameImages();
         } else {
             console.log('Canvas initialization error!');
         }
@@ -127,12 +129,21 @@ var snakeGame = (function() {
         dataDisplayContext = util.initCanvasContext(dataDisplayCanvasElement);
     }
 
+    function initGameImages() {
+        numberImage = new Image;
+        numberImage.onload = function() {
+            gameBackgroundContext.drawImage(numberImage, 0, 0, 350, 40, 0, 0, 350, 40);
+        };
+        //numberImage.src = 'n.png';
+        numberImage.src = '../../img/numbers.png';
+    }
+
     function initGameBackgroundCanvas() {
-        draw.drawCanvasBackground(gameBackgroundContext, gameBackgroundCanvasElement.width, gameBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);
-        
+        draw.drawCanvasBackground(gameBackgroundContext, gameBackgroundCanvasElement.width, gameBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);                
+
         let tileNumberHorizontal = Math.floor(gameBackgroundCanvasElement.width / constans.TILESIZE);
         let tileNumberVertical = Math.floor(gameBackgroundCanvasElement.height / constans.TILESIZE);
-        
+                
         for(let i = 0; i !== tileNumberHorizontal + 1; i++) {
             draw.drawLine(gameBackgroundContext, i * constans.TILESIZE, 0, i * constans.TILESIZE, tileNumberVertical * constans.TILESIZE, constans.GAME_BACKGROUND_GRID_COLOR);
         }
@@ -142,8 +153,7 @@ var snakeGame = (function() {
     }
 
     function initDataBackgroundCanvas() {
-        draw.drawCanvasBackground(dataBackgroundContext, dataBackgroundCanvasElement.width, dataBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);
-
+        draw.drawCanvasBackground(dataBackgroundContext, dataBackgroundCanvasElement.width, dataBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);        
     }
 
     function initAudio() {
@@ -153,10 +163,10 @@ var snakeGame = (function() {
 
     function initGame() {
         initSnake();
-        createTarget();
+        createTarget();        
         //https://www.kirupa.com/canvas/moving_shapes_canvas_keyboard.htm
         window.addEventListener("keydown", processInput, false);    //a billentyűzet kezelést nem kell a gameLoop-ban figyelni, ezt minden böngész támogatja
-        isGameRunning = true;
+        isGameRunning = true;        
     }
 
     function initSnake() {
@@ -299,6 +309,7 @@ var snakeGame = (function() {
             draw.drawFillSquare(gameSnakeContext, target.pos.column * constans.TILESIZE, target.pos.row * constans.TILESIZE, constans.TILESIZE, constans.TARGET_TILE_GRID_COLOR);
             target.isRendered = false;
         }
+        //dataDisplayContext.drawImage(numberImage, 0, 0, 350, 40, 0, 0, 350, 40);
     }
 
     //gameloop tutorials: 
