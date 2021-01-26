@@ -15,12 +15,9 @@
     - a browser localDB-be adatot menteni / olvasni
 */
 
-//sprite object example:
+//GameObject (sprite object) example:
 //https://mr-easy.github.io/2017-06-26-creating-spritesheet-animation-in-html5-canvas-using-javascript/
 //http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
-
-//GameObject example:
-//https://mr-easy.github.io/2017-06-26-creating-spritesheet-animation-in-html5-canvas-using-javascript/
 
 "use strict";
 
@@ -132,7 +129,7 @@ var snakeGame = (function() {
     function initGameImages() {
         numberImage = new Image;
         numberImage.onload = function() {
-            gameBackgroundContext.drawImage(numberImage, 0, 0, 350, 40, 0, 0, 350, 40);
+            dataDisplayContext.drawImage(numberImage, 0, 0, 350, 40, 5, 5, 350, 40);
         };
         //numberImage.src = 'n.png';
         numberImage.src = '../../img/numbers.png';
@@ -355,7 +352,7 @@ var constans = (function() {
 
     var _TILESIZE = 10;
     var _WEB_PAGE_DIV_PADDING_HEIGHTS = 60;        
-    var _DATA_CANVAS_HEIGHT = 30;
+    var _DATA_CANVAS_HEIGHT = 50;
     var _MAP_EMPTY_GRID = 0;
     var _CANVAS_BACKGROUND_COLOR = '#204060';
     var _GAME_BACKGROUND_GRID_COLOR = '#1f3852';
