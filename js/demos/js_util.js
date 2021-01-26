@@ -84,6 +84,10 @@ var draw = (function() {
   function clearRectangle(canvasContext, x, y, width, height) {
     canvasContext.clearRect(x, y, width, height); 
   }
+
+  function drawGameObjectImage(canvasContext, image, gameGrapObject) {
+    canvasContext.drawImage(image, gameGrapObject.x, gameGrapObject.y, gameGrapObject.width, gameGrapObject.height, gameGrapObject.cx, gameGrapObject.cy, gameGrapObject.width, gameGrapObject.height);
+  }
   
   return {
 
@@ -105,6 +109,10 @@ var draw = (function() {
 
     clearRectangle: function(canvasContext, x, y, width, height) {
       clearRectangle(canvasContext, x, y, width, height);
+    },
+
+    drawGameObjectImage: function(canvasContext, image, gameGrapObject) {
+      drawGameObjectImage(canvasContext, image, gameGrapObject);
     }
 
   };

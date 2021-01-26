@@ -57,7 +57,17 @@ var snakeGame = (function() {
         currentLength: 0,
         bodyTiles: new Array(),
         deletedElement: tileObject
-    };
+    }
+
+    var numberDrawObject = {        
+        numberValue: 0,
+        cx: 0,
+        cy: 0,
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0        
+    }
 
     var gameMapRow;
     var gameMapColumn;
@@ -68,6 +78,9 @@ var snakeGame = (function() {
     var gameSpeed = 40;
     var hitSoundEffect;
     var numberImage;
+
+    var number_0;
+    var numberObjectArray;
 
     //game loop variables
     var now; 
@@ -124,16 +137,7 @@ var snakeGame = (function() {
         gameSnakeContext = util.initCanvasContext(gameSnakeCanvasElement);
         dataBackgroundContext = util.initCanvasContext(dataBackgroundCanvasElement);
         dataDisplayContext = util.initCanvasContext(dataDisplayCanvasElement);
-    }
-
-    function initGameImages() {
-        numberImage = new Image;
-        numberImage.onload = function() {
-            dataDisplayContext.drawImage(numberImage, 0, 0, 350, 40, 5, 5, 350, 40);
-        };
-        //numberImage.src = 'n.png';
-        numberImage.src = '../../img/numbers.png';
-    }
+    }    
 
     function initGameBackgroundCanvas() {
         draw.drawCanvasBackground(gameBackgroundContext, gameBackgroundCanvasElement.width, gameBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);                
@@ -151,6 +155,33 @@ var snakeGame = (function() {
 
     function initDataBackgroundCanvas() {
         draw.drawCanvasBackground(dataBackgroundContext, dataBackgroundCanvasElement.width, dataBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);        
+    }
+
+    function initGameImages() {
+        numberImage = new Image;
+        numberImage.onload = function() {            
+            numberObjectArray = new Array();
+            
+            let xx = 0;
+            for(let i = 0; i != 9; i++) {
+                let numObject = Object.create(numberDrawObject);
+                numObject.numberValue = i;
+                numObject.x += xx;
+                numObject.y = 0;
+                numObject.width = 35;
+                numObject.height = 40;
+                numObject.cx = 5;
+                numObject.cy = 5;
+
+                numberObjectArray.push(numObject);
+                xx += 35;
+            }                        
+            draw.drawGameObjectImage(dataDisplayContext, numberImage, numberObjectArray[0]);
+            draw.drawGameObjectImage(dataDisplayContext, numberImage, numberObjectArray[1]);
+            //dataDisplayContext.drawImage(numberImage, 0, 0, 35, 40, 5, 5, 35, 40);            
+        };
+        
+        numberImage.src = '../../img/numbers.png';
     }
 
     function initAudio() {
@@ -305,8 +336,7 @@ var snakeGame = (function() {
         if(target.isRendered) {     //no redundant rendered
             draw.drawFillSquare(gameSnakeContext, target.pos.column * constans.TILESIZE, target.pos.row * constans.TILESIZE, constans.TILESIZE, constans.TARGET_TILE_GRID_COLOR);
             target.isRendered = false;
-        }
-        //dataDisplayContext.drawImage(numberImage, 0, 0, 350, 40, 0, 0, 350, 40);
+        }        
     }
 
     //gameloop tutorials: 
