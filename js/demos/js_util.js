@@ -38,6 +38,14 @@ var util = (function() {
     nowTimeStamp: function() {
       return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
     },
+    
+    addNewItemToLocalStorage: function(key, variable) {
+      localStorage.setItem(key, variable);
+    },
+
+    removeItemFromLocalStorage: function(key) {
+      localStorage.removeItem(key);
+    }
 
   };
 }());
@@ -85,8 +93,9 @@ var draw = (function() {
     canvasContext.clearRect(x, y, width, height); 
   }
 
-  function drawGameObjectImage(canvasContext, image, gameGrapObject) {
-    canvasContext.drawImage(image, gameGrapObject.x, gameGrapObject.y, gameGrapObject.width, gameGrapObject.height, gameGrapObject.cx, gameGrapObject.cy, gameGrapObject.width, gameGrapObject.height);
+  function drawNumberImage(canvasContext, image, gameGrapObject, canvasX, canvasY) {
+    canvasContext.clearRect(canvasX, canvasY, canvasX + 40, gameGrapObject.height);
+    canvasContext.drawImage(image, gameGrapObject.x, gameGrapObject.y, gameGrapObject.width, gameGrapObject.height, canvasX, canvasY, gameGrapObject.width, gameGrapObject.height);
   }
   
   return {
@@ -111,8 +120,8 @@ var draw = (function() {
       clearRectangle(canvasContext, x, y, width, height);
     },
 
-    drawGameObjectImage: function(canvasContext, image, gameGrapObject) {
-      drawGameObjectImage(canvasContext, image, gameGrapObject);
+    drawNumberImage: function(canvasContext, image, gameGrapObject, canvasX, canvasY) {
+      drawNumberImage(canvasContext, image, gameGrapObject, canvasX, canvasY);
     }
 
   };

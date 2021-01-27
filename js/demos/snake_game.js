@@ -9,10 +9,10 @@
 
 /*
     Kipróbálási feladatok:
-    - sprite-ok alkalmazása valamilyen grafikus programban létrehozva, és rárakva a canvas-re,
-    - canvas egér kezelés sprite-on, és egy kijelölt területen területen,
-    - hang effektek létrehozása (+ esetleg zene),
-    - a browser localDB-be adatot menteni / olvasni
+    - sprite-ok alkalmazása valamilyen grafikus programban létrehozva, és rárakva a canvas-re, [OK - grafikus sprite alapú a számok megjelenítése a dataDisplayCanvas-en]
+    - canvas egér kezelés sprite-on, és egy kijelölt területen,
+    - hang effektek létrehozása (+ esetleg zene), [OK - amikor eltalál egy target-et a snake, de előtte rá kell kattintani a canvas-re, mert user iterakció kell a böngésző alapú hanglejátszáshoz, biztonsági okokból, erre megoldást kell találni (programmatically click ???)]
+    - a browser localDB-be adatot menteni / olvasni [OK]
 */
 
 //GameObject (sprite object) example:
@@ -60,13 +60,11 @@ var snakeGame = (function() {
     }
 
     var numberDrawObject = {        
-        numberValue: 0,
-        cx: 0,
-        cy: 0,
+        numberValue: 0,        
         x: 0,
         y: 0,
         width: 0,
-        height: 0        
+        height: 0
     }
 
     var gameMapRow;
@@ -77,10 +75,11 @@ var snakeGame = (function() {
     var isKeyDown = true;           //a render előtt ne lehessen dupla billentyűt használni, ez nélkül a snake-et vissza lehetne fordítani saját magába (a addEventListener független a gameLoop-tól)
     var gameSpeed = 40;
     var hitSoundEffect;
+    var isLoadedNumbers;
     var numberImage;
+    var userPoint;
 
-    var number_0;
-    var numberObjectArray;
+    var numbersSpriteArray;
 
     //game loop variables
     var now; 
@@ -126,7 +125,7 @@ var snakeGame = (function() {
             initCanvasContexts();            
             initDataBackgroundCanvas();
             initGameBackgroundCanvas();
-            initGameImages();
+            initSpriteImages();
         } else {
             console.log('Canvas initialization error!');
         }
@@ -157,30 +156,34 @@ var snakeGame = (function() {
         draw.drawCanvasBackground(dataBackgroundContext, dataBackgroundCanvasElement.width, dataBackgroundCanvasElement.height, constans.CANVAS_BACKGROUND_COLOR);        
     }
 
-    function initGameImages() {
+    function initSpriteImages() {
+        isLoadedNumbers = false;
         numberImage = new Image;
         numberImage.onload = function() {            
-            numberObjectArray = new Array();
+            numbersSpriteArray = new Array();
             
             let xx = 0;
-            for(let i = 0; i != 9; i++) {
+            for(let i = 0; i != 10; i++) {
                 let numObject = Object.create(numberDrawObject);
                 numObject.numberValue = i;
                 numObject.x += xx;
                 numObject.y = 0;
-                numObject.width = 35;
+                numObject.width = numObject.numberValue != 1 ? 35 : 22;
                 numObject.height = 40;
-                numObject.cx = 5;
-                numObject.cy = 5;
 
-                numberObjectArray.push(numObject);
-                xx += 35;
-            }                        
-            draw.drawGameObjectImage(dataDisplayContext, numberImage, numberObjectArray[0]);
-            draw.drawGameObjectImage(dataDisplayContext, numberImage, numberObjectArray[1]);
-            //dataDisplayContext.drawImage(numberImage, 0, 0, 35, 40, 5, 5, 35, 40);            
-        };
-        
+                numbersSpriteArray.push(numObject);
+                
+                switch(i) {
+                    case 0: xx = 35; break;
+                    case 1: xx = 58; break;
+                    default: xx += 36; break;
+                }
+
+                draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[0], 10, 5);        //start: 0 point
+            }
+            //dataDisplayContext.drawImage(numberImage, 0, 0, 35, 40, 5, 5, 35, 40);
+            isLoadedNumbers = true;
+        };        
         numberImage.src = '../../img/numbers.png';
     }
 
@@ -194,6 +197,7 @@ var snakeGame = (function() {
         createTarget();        
         //https://www.kirupa.com/canvas/moving_shapes_canvas_keyboard.htm
         window.addEventListener("keydown", processInput, false);    //a billentyűzet kezelést nem kell a gameLoop-ban figyelni, ezt minden böngész támogatja
+        userPoint = 0;
         isGameRunning = true;        
     }
 
@@ -282,7 +286,8 @@ var snakeGame = (function() {
         if(snake.head.row === target.pos.row && snake.head.column === target.pos.column) {
             playAudio();
             snake.currentLength += target.hitPoint;
-            createTarget();            
+            userPoint++;
+            createTarget();          
         }
         //snake and wall collision (in default case, the snake new position on the other side)
         //top side
@@ -335,8 +340,36 @@ var snakeGame = (function() {
         }
         if(target.isRendered) {     //no redundant rendered
             draw.drawFillSquare(gameSnakeContext, target.pos.column * constans.TILESIZE, target.pos.row * constans.TILESIZE, constans.TILESIZE, constans.TARGET_TILE_GRID_COLOR);
-            target.isRendered = false;
-        }        
+            target.isRendered = false;            
+            if(isLoadedNumbers) {
+                renderedUserPoints();
+            }
+        }
+    }
+
+    function renderedUserPoints() {        
+        let userPointString = userPoint.toString();
+        let numberX = 10;
+        for(let i = 0; i != userPointString.length; i++) {
+            let number = userPointString.charAt(i);
+            switch(number) {
+                case '0': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[0], numberX, 5); break;
+                case '1': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[1], numberX, 5); break;
+                case '2': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[2], numberX, 5); break;
+                case '3': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[3], numberX, 5); break;
+                case '4': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[4], numberX, 5); break;
+                case '5': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[5], numberX, 5); break;
+                case '6': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[6], numberX, 5); break;
+                case '7': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[7], numberX, 5); break;
+                case '8': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[8], numberX, 5); break;
+                case '9': draw.drawNumberImage(dataDisplayContext, numberImage, numbersSpriteArray[9], numberX, 5); break;
+            }
+            if(number == '1') {
+                numberX += 25;
+            } else {
+                numberX += 38;
+            }
+        }
     }
 
     //gameloop tutorials: 
@@ -368,7 +401,10 @@ var snakeGame = (function() {
 
     return {
         
-        init: function() {
+        init: function() {            
+            //util.addNewItemToLocalStorage("test1", "ez egy érték");       //Local storage example [OK]
+            //util.removeItemFromLocalStorage('test1');                     //[OK]
+
             initCanvases();
             initAudio();
             initGame();
@@ -386,7 +422,7 @@ var constans = (function() {
     var _MAP_EMPTY_GRID = 0;
     var _CANVAS_BACKGROUND_COLOR = '#204060';
     var _GAME_BACKGROUND_GRID_COLOR = '#1f3852';
-    var _TARGET_TILE_GRID_COLOR = '#000';
+    var _TARGET_TILE_GRID_COLOR = '#eeab0d';
     var _SNAKE_TILE_GRID_COLOR = '#fff';
     var _SNAKE_START_LENGTH = 4;
 
