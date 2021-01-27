@@ -9,6 +9,7 @@
 
 /*
     Kipróbálási feladatok:
+    - javascript alapú gameLoop, [OK]
     - sprite-ok alkalmazása valamilyen grafikus programban létrehozva, és rárakva a canvas-re, [OK - grafikus sprite alapú a számok megjelenítése a dataDisplayCanvas-en]
     - canvas egér kezelés sprite-on, és egy kijelölt területen,
     - hang effektek létrehozása (+ esetleg zene), [OK - amikor eltalál egy target-et a snake, de előtte rá kell kattintani a canvas-re, mert user iterakció kell a böngésző alapú hanglejátszáshoz, biztonsági okokból, erre megoldást kell találni (programmatically click ???)]
